@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <Itf Name="IAssertionListener" Id="{3013ab36-1e65-0a80-2235-5faa497c56a4}">
+    <Declaration><![CDATA[INTERFACE IAssertionListener
+]]></Declaration>
+    <Method Name="OnAssertionFailed" Id="{b6db4923-68d1-0c12-24c0-3d61a89106a5}">
+      <Declaration><![CDATA[METHOD OnAssertionFailed
+VAR_INPUT
+    AssertionMessage : T_MaxString;
+    ExpectedAsString : T_MaxString;
+    ActualAsString   : T_MaxString;
+END_VAR
+]]></Declaration>
+    </Method>
+  </Itf>
+</TcPlcObject>

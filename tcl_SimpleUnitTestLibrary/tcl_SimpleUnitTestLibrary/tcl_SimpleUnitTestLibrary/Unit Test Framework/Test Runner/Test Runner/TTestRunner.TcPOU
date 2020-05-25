@@ -1,0 +1,211 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="TTestRunner" Id="{c7f35beb-7079-466d-ae1a-1beb011dea9f}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TTestRunner 
+VAR_INPUT
+    RunTestsSequentially : BOOL;
+END_VAR
+VAR
+    Run : BOOL := TRUE;
+    
+    State :(
+        Init,
+        RunTests_Concurrently,
+        RunTests_Sequentially,
+        CheckResults);
+        
+    i : INT;
+    CompletedTestsCount : INT;
+    FailedTestsCount : INT;
+    CurrentTestIndex : INT;
+    
+    _TestsRunning : BOOL;
+    _Results : T_MaxString;
+    _AllTestsCompleted : BOOL;
+    _TestCount : INT;
+    
+    Tests : ARRAY[0..MAX_TESTS] OF IUnitTest;
+    TestResults : ARRAY[0..MAX_TESTS] OF TTestResult;
+    AssertionMessages : TAssertionMessageList;
+    
+    TestsCompletedPercentage : LREAL;
+END_VAR
+
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE State OF
+    Init:
+        IF Run THEN
+            Run := FALSE;
+            ClearResults();
+            AssertionMessages.Clear();
+            FOR i := 0 TO _TestCount - 1 DO
+                IF Tests[i] <> 0 THEN
+                    Tests[i].Initialise(AssertionMessages);
+				END_IF
+			END_FOR
+            _TestsRunning := TRUE;
+            IF RunTestsSequentially THEN
+                CurrentTestIndex := 0;
+                State := RunTests_Sequentially;
+            ELSE
+                State := RunTests_Concurrently;
+            END_IF
+		END_IF
+        
+    RunTests_Concurrently:
+        CompletedTestsCount := 0;
+        FOR i := 0 TO _TestCount - 1 DO
+            IF Tests[i] <> 0 THEN
+                IF Tests[i].TestHasFinished THEN
+                    IF Tests[i].TestHasFailed THEN
+                        TestResults[i].TestName  := Tests[i].TestName;
+                        TestResults[i].TestState := 'Failed';
+                        TestResults[i].ImageRef  := '3';
+                        FailedTestsCount := FailedTestsCount + 1;
+                    ELSE
+                        TestResults[i].TestName  := Tests[i].TestName;
+                        TestResults[i].TestState := 'Passed';
+                        TestResults[i].ImageRef  := '2';
+                    END_IF    
+                    
+                    CompletedTestsCount := CompletedTestsCount + 1;
+                    TestsCompletedPercentage := CompletedTestsCount * 100/_TestCount;
+                    _Results := F_FormatString2('%d Tests completed, %d Tests Failed',F_INT(CompletedTestsCount),F_INT(FailedTestsCount));
+                ELSE
+                    TestResults[i].TestName  := Tests[i].TestName;
+                    TestResults[i].TestState := 'Running';
+                    TestResults[i].ImageRef  := '1';
+                    Tests[i].Execute();
+                END_IF
+            END_IF
+        END_FOR
+        IF CompletedTestsCount >= _TestCount THEN
+            State := CheckResults;
+		END_IF
+        
+    RunTests_Sequentially:
+        IF Tests[CurrentTestIndex] <> 0 THEN
+            IF Tests[CurrentTestIndex].TestHasFinished THEN
+                IF Tests[CurrentTestIndex].TestHasFailed THEN
+                    TestResults[CurrentTestIndex].TestName  := Tests[CurrentTestIndex].TestName;
+                    TestResults[CurrentTestIndex].TestState := 'Failed';
+                    TestResults[CurrentTestIndex].ImageRef  := '3';
+                    FailedTestsCount := FailedTestsCount + 1;
+                ELSE
+                    TestResults[CurrentTestIndex].TestName  := Tests[CurrentTestIndex].TestName;
+                    TestResults[CurrentTestIndex].TestState := 'Passed';
+                    TestResults[CurrentTestIndex].ImageRef  := '2';
+                END_IF    
+                
+                CompletedTestsCount := CompletedTestsCount + 1;
+                CurrentTestIndex := CurrentTestIndex + 1;
+                TestsCompletedPercentage := CompletedTestsCount * 100/_TestCount;
+                _Results := F_FormatString2('%d Tests completed, %d Tests Failed',F_INT(CompletedTestsCount),F_INT(FailedTestsCount));
+            ELSE
+                TestResults[CurrentTestIndex].TestName  := Tests[CurrentTestIndex].TestName;
+                TestResults[CurrentTestIndex].TestState := 'Running';
+                TestResults[CurrentTestIndex].ImageRef  := '1';
+                Tests[CurrentTestIndex].Execute();
+            END_IF
+        END_IF
+
+        IF CompletedTestsCount >= _TestCount THEN
+            State := CheckResults;
+		END_IF
+
+    CheckResults:
+        _Results := F_FormatString2('%d Tests completed, %d Tests Failed',F_INT(CompletedTestsCount),F_INT(FailedTestsCount));
+        _TestsRunning := FALSE;
+        _AllTestsCompleted := TRUE;
+        
+        State := Init;
+    
+    
+END_CASE]]></ST>
+    </Implementation>
+    <Method Name="AddTest" Id="{aff2d568-ab55-47bc-af2b-94e85ba5e218}">
+      <Declaration><![CDATA[METHOD AddTest : BOOL
+VAR_INPUT
+    UnitTest : IUnitTest;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _TestCount < MAX_TESTS THEN
+    Tests[_TestCount] := UnitTest;
+    _TestCount := _TestCount + 1;
+    AddTest := TRUE;
+ELSE
+    AssertionMessages.AddMessage('Maximum unit tests exceeded!');
+END_IF
+
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="AllTestsCompleted" Id="{35232731-1165-473b-9489-dda727905bbe}">
+      <Declaration><![CDATA[PROPERTY AllTestsCompleted : BOOL]]></Declaration>
+      <Get Name="Get" Id="{427b4cbb-213d-4f37-80e2-9b36fbd84c82}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[AllTestsCompleted := _AllTestsCompleted;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Method Name="ClearResults" Id="{57179eef-fc7b-4bd0-85fd-730ca5472c60}">
+      <Declaration><![CDATA[METHOD ClearResults
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_Results := '';
+_AllTestsCompleted := FALSE;
+FailedTestsCount := 0;
+CompletedTestsCount := 0;
+TestsCompletedPercentage := 0;
+
+MEMSET(
+    destAddr := ADR(TestResults), 
+    fillByte := 0, 
+    n        := SIZEOF(TestResults));
+]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="Results" Id="{d09ac635-f5a8-46e9-8513-febf5f67e4bf}">
+      <Declaration><![CDATA[PROPERTY Results : T_MaxString]]></Declaration>
+      <Get Name="Get" Id="{bac56fdf-ab86-41b2-bda2-a53cd7cf550f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[Results := _Results;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="TestCount" Id="{071111e2-ed4d-4d68-b95e-6b4cb6b3aa16}">
+      <Declaration><![CDATA[PROPERTY TestCount : INT]]></Declaration>
+      <Get Name="Get" Id="{cc7bd08b-b6fe-4e09-88cb-16b9dd473b3f}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TestCount := _TestCount;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="TestsRunning" Id="{cc8e65a0-6524-4f90-8531-cec392ab281c}">
+      <Declaration><![CDATA[PROPERTY TestsRunning : BOOL]]></Declaration>
+      <Get Name="Get" Id="{0fb901a8-23b3-444c-a819-bc19c7f6c2c0}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TestsRunning := _TestsRunning;
+]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>

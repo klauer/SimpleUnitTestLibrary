@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <GlobalImagePool Name="GlobalImagePool" Id="{7bffdd2d-90fa-43d8-bfd4-3303d3a03db8}">
+    <XmlArchive>
+      <Data>
+        <o xml:space="preserve" t="GlobalImagePoolObject">
+          <v n="UniqueIdGenerator">"27"</v>
+          <l n="BitmapPool" t="ArrayList" cet="ImagePoolItem">
+            <o>
+              <v n="BitmapID">"3"</v>
+              <v n="FileID">"5ce3da45-db07-42e7-a21c-a00fff4ed8f6|Images\Failed.png"</v>
+              <v n="ItemID">10</v>
+            </o>
+            <o>
+              <v n="BitmapID">"2"</v>
+              <v n="FileID">"5ce3da45-db07-42e7-a21c-a00fff4ed8f6|Images\Passed.png"</v>
+              <v n="ItemID">14</v>
+            </o>
+            <o>
+              <v n="BitmapID">"1"</v>
+              <v n="FileID">"5ce3da45-db07-42e7-a21c-a00fff4ed8f6|Images\BlueRight.png"</v>
+              <v n="ItemID">17</v>
+            </o>
+            <o>
+              <v n="BitmapID">""</v>
+              <v n="FileID">""</v>
+              <v n="ItemID">23</v>
+            </o>
+          </l>
+          <v n="GuidInit">{fef981e0-f203-4315-9502-f25706122c8e}</v>
+          <v n="GuidReInit">{601adcc5-e482-42cd-818d-6b56b06e65b3}</v>
+          <v n="GuidExitX">{430bf94a-f87b-468d-b03e-f623121fd491}</v>
+          <v n="ValidIds">true</v>
+        </o>
+      </Data>
+      <TypeList>
+        <Type n="ArrayList">System.Collections.ArrayList</Type>
+        <Type n="Boolean">System.Boolean</Type>
+        <Type n="GlobalImagePoolObject">{795b536d-9cec-4fc3-a972-50e1e08d20e8}</Type>
+        <Type n="Guid">System.Guid</Type>
+        <Type n="ImagePoolItem">{215b2719-0347-4e4d-ba85-8bcd66946f66}</Type>
+        <Type n="Int32">System.Int32</Type>
+        <Type n="String">System.String</Type>
+      </TypeList>
+    </XmlArchive>
+  </GlobalImagePool>
+</TcPlcObject>

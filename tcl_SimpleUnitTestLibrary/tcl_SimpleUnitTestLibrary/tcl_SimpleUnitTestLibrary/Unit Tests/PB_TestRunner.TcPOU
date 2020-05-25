@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="PB_TestRunner" Id="{a755dca6-4b07-4813-bdbd-9b14c5cd29a6}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM PB_TestRunner
+VAR
+    Test_AssertEquals_BOOL      : Test_AssertEquals_BOOL;
+    Test_AssertEquals_BYTE      : Test_AssertEquals_BYTE;
+    Test_AssertEquals_DINT      : Test_AssertEquals_DINT;
+    Test_AssertEquals_INT       : Test_AssertEquals_INT;
+    Test_AssertEquals_INTERFACE : Test_AssertEquals_INTERFACE;
+    Test_AssertEquals_LINT      : Test_AssertEquals_LINT;
+    Test_AssertEquals_LREAL     : Test_AssertEquals_LREAL;
+    Test_AssertEquals_PVOID     : Test_AssertEquals_PVOID;
+    Test_AssertEquals_REAL      : Test_AssertEquals_REAL;
+    Test_AssertEquals_STRING    : Test_AssertEquals_STRING;
+    Test_AssertEquals_UDINT     : Test_AssertEquals_UDINT;
+    Test_AssertEquals_UINT      : Test_AssertEquals_UINT;
+    Test_AssertEquals_ULINT     : Test_AssertEquals_ULINT;  
+    Test_AssertEquals_WORD      : Test_AssertEquals_WORD;
+    Test_AssertEquals_DWORD     : Test_AssertEquals_DWORD;
+    
+    Test_AssertEquals_BLOB_SizeDiffers          : Test_AssertEquals_BLOB_SizeDiffers;  
+    Test_AssertEquals_BLOB_TypeClassDiffers     : Test_AssertEquals_BLOB_TypeClassDiffers;
+    Test_AssertEquals_BLOB_TypeContentDiffers   : Test_AssertEquals_BLOB_TypeContentDiffers;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[TestFramework.TestRunner();]]></ST>
+    </Implementation>
+  </POU>
+</TcPlcObject>

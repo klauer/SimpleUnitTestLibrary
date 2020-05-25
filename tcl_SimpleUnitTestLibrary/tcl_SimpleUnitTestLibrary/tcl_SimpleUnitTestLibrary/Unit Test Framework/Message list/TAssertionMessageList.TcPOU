@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="TAssertionMessageList" Id="{e7d5340d-c089-4dbb-ae44-9c00444fa0e8}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK TAssertionMessageList IMPLEMENTS IAssertionMessageList
+VAR
+    _Messages : ARRAY[0..MAX_ASSERTION_MESSAGES] OF T_MaxString;
+    _Count : INT;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="AddMessage" Id="{41dc59db-d4bf-41a1-b4a5-2d7f6c4a7161}">
+      <Declaration><![CDATA[METHOD AddMessage : BOOL
+VAR_INPUT
+    Message : T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF _Count <= MAX_ASSERTION_MESSAGES THEN
+    _Messages[_Count] := Message;
+    _Count := _Count + 1;
+    AddMessage := TRUE;
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Clear" Id="{81a3ce51-6363-4c36-9872-c4b7a11d1f4c}">
+      <Declaration><![CDATA[METHOD Clear
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[MEMSET(
+    destAddr := ADR(_Messages), 
+    fillByte := 0, 
+    n        := SIZEOF(_Messages));
+_Count := 0;
+]]></ST>
+      </Implementation>
+    </Method>
+  </POU>
+</TcPlcObject>

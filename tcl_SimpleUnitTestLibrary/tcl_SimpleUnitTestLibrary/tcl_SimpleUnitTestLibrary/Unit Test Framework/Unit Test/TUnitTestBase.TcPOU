@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+  <POU Name="TUnitTestBase" Id="{5f6c3920-eb7a-49e5-908c-08b83c026c35}" SpecialFunc="None">
+    <Declaration><![CDATA[{attribute 'reflection'}
+FUNCTION_BLOCK ABSTRACT TUnitTestBase IMPLEMENTS IUnitTest, IAssertionListener
+VAR
+    {attribute 'instance-path'} 
+    {attribute 'no_init'}
+    _TestName : T_MaxString; // Automatically initialised with the full name of the instance
+    
+    _TestFailed : BOOL;
+    _TestFinished : BOOL;
+    _ImageRef : STRING;
+    _MessageList : IAssertionMessageList;
+    
+    Assertion : TAssertion(THIS^);
+
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <Method Name="Execute" Id="{1cfba8ca-d4ce-4ec4-8707-d70a9a291eab}">
+      <Declaration><![CDATA[METHOD Execute
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[THIS^();]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="FB_init" Id="{50ea1a2d-ce62-4995-a376-1159add5fe74}">
+      <Declaration><![CDATA[METHOD FB_init : BOOL
+VAR_INPUT
+	bInitRetains : BOOL; // if TRUE, the retain variables are initialized (warm start / cold start)
+	bInCopyCode : BOOL;  // if TRUE, the instance afterwards gets moved into the copy code (online change)
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[IF NOT bInCopyCode THEN
+    TestFramework.TestRunner.AddTest(THIS^);
+END_IF
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="Initialise" Id="{c86508f2-0a12-445b-9bb3-f664bdcd4e53}">
+      <Declaration><![CDATA[METHOD Initialise
+VAR_INPUT
+    MessageList : IAssertionMessageList;
+END_VAR
+VAR
+    StringSplitter : TStringSplitter;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_TestFailed   := FALSE;
+_TestFinished := FALSE;
+_ImageRef     := '0';
+_MessageList  := MessageList;
+
+StringSplitter.Init(
+    Str := _TestName,
+    Delim1 := '.',
+    Delim2 := '');
+    
+WHILE StringSplitter.HasMore() DO
+    _TestName := StringSplitter.GetNext(); // to get last sub-section
+END_WHILE
+]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="OnAssertionFailed" Id="{fd6c487c-95ee-0775-0c67-5c39af276035}">
+      <Declaration><![CDATA[METHOD OnAssertionFailed
+VAR_INPUT
+    AssertionMessage : T_MaxString;
+    ExpectedAsString : T_MaxString;
+    ActualAsString   : T_MaxString;
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_TestFailed := TRUE;
+_MessageList.AddMessage(AssertionMessage);
+
+IF ExpectedAsString <> '' THEN
+    _MessageList.AddMessage(ExpectedAsString);
+END_IF
+
+IF ActualAsString <> '' THEN
+    _MessageList.AddMessage(ActualAsString);
+END_IF]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="TestFinished" Id="{f9554933-97f3-48a5-a721-13782a1587cd}">
+      <Declaration><![CDATA[METHOD TestFinished
+VAR_INPUT
+END_VAR
+]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[_TestFinished := TRUE;]]></ST>
+      </Implementation>
+    </Method>
+    <Property Name="TestHasFailed" Id="{b7849270-c8d1-4b4d-8e55-7ac7432c746b}">
+      <Declaration><![CDATA[PROPERTY TestHasFailed : BOOL]]></Declaration>
+      <Get Name="Get" Id="{960f25ef-372b-43ed-b423-24b2b17dce8a}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TestHasFailed := _TestFailed;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="TestHasFinished" Id="{1d3107c4-993a-43fc-80aa-35d26b65703c}">
+      <Declaration><![CDATA[PROPERTY TestHasFinished : BOOL]]></Declaration>
+      <Get Name="Get" Id="{92979e69-b298-4864-9fb5-4e9e6245ef62}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TestHasFinished := _TestFinished;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+    <Property Name="TestName" Id="{d429c824-d3a5-422b-a3ec-1e2fb1e7cb7a}">
+      <Declaration><![CDATA[PROPERTY TestName : T_MaxString]]></Declaration>
+      <Get Name="Get" Id="{80e54b19-a2c6-4d0f-81fb-c32e95f224e5}">
+        <Declaration><![CDATA[VAR
+END_VAR
+]]></Declaration>
+        <Implementation>
+          <ST><![CDATA[TestName := _TestName;]]></ST>
+        </Implementation>
+      </Get>
+    </Property>
+  </POU>
+</TcPlcObject>
