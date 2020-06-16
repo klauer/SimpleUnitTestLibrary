@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.3">
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.4">
   <POU Name="TTestRunner" Id="{c7f35beb-7079-466d-ae1a-1beb011dea9f}" SpecialFunc="None">
     <Declaration><![CDATA[FUNCTION_BLOCK TTestRunner 
 VAR_INPUT
@@ -58,6 +58,7 @@ END_VAR
         FOR i := 0 TO _TestCount - 1 DO
             IF Tests[i] <> 0 THEN
                 IF Tests[i].TestHasFinished THEN
+                    addTimeStamp(TestResults[i]);
                     IF Tests[i].TestHasFailed THEN
                         TestResults[i].TestName  := Tests[i].TestName;
                         TestResults[i].TestState := 'Failed';
@@ -87,6 +88,7 @@ END_VAR
     RunTests_Sequentially:
         IF Tests[CurrentTestIndex] <> 0 THEN
             IF Tests[CurrentTestIndex].TestHasFinished THEN
+                addTimeStamp(TestResults[CurrentTestIndex]);
                 IF Tests[CurrentTestIndex].TestHasFailed THEN
                     TestResults[CurrentTestIndex].TestName  := Tests[CurrentTestIndex].TestName;
                     TestResults[CurrentTestIndex].TestState := 'Failed';
@@ -140,6 +142,26 @@ ELSE
 END_IF
 
 ]]></ST>
+      </Implementation>
+    </Method>
+    <Method Name="addTimeStamp" Id="{bdd169f4-a7c0-4197-b9c5-ebb28699c68a}">
+      <Declaration><![CDATA[METHOD PRIVATE addTimeStamp
+VAR_IN_OUT
+    TestResult : TTestResult;
+END_VAR
+VAR
+	currTask : GETCURTASKINDEX;
+    dateTime : DATE_AND_TIME;
+END_VAR]]></Declaration>
+      <Implementation>
+        <ST><![CDATA[currTask();
+dateTime := 
+    LINT_TO_DT( 
+        TO_LINT( DT#2000-1-1-00:00 ) 
+        + TwinCAT_SystemInfoVarList._TaskInfo[currTask.index].DcTaskTime / 1_000_000_000 
+    );
+
+TestResult.TestCompleteTime := TO_STRING( dateTime );]]></ST>
       </Implementation>
     </Method>
     <Property Name="AllTestsCompleted" Id="{35232731-1165-473b-9489-dda727905bbe}">
