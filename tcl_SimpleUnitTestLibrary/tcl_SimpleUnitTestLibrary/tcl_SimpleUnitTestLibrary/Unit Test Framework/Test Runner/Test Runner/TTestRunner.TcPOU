@@ -150,18 +150,13 @@ VAR_IN_OUT
     TestResult : TTestResult;
 END_VAR
 VAR
-	currTask : GETCURTASKINDEX;
-    dateTime : DATE_AND_TIME;
+	CurrentDcTime : T_DCTIME64;
+    Now : TIMESTRUCT;
 END_VAR]]></Declaration>
       <Implementation>
-        <ST><![CDATA[currTask();
-dateTime := 
-    LINT_TO_DT( 
-        TO_LINT( DT#2000-1-1-00:00 ) 
-        + TwinCAT_SystemInfoVarList._TaskInfo[currTask.index].DcTaskTime / 1_000_000_000 
-    );
-
-TestResult.TestCompleteTime := TO_STRING( dateTime );]]></ST>
+        <ST><![CDATA[CurrentDcTime := F_GetActualDcTime64();
+Now := DCTIME64_TO_SYSTEMTIME(CurrentDcTime);
+TestResult.TestCompleteTime := tcl_StringUtils.F_TimeAsString_ms(Now);]]></ST>
       </Implementation>
     </Method>
     <Property Name="AllTestsCompleted" Id="{35232731-1165-473b-9489-dda727905bbe}">
