@@ -1,0 +1,43 @@
+language: python
+python: 3.7
+
+env:
+  global:
+    # Doctr deploy key for klauer/SimpleUnitTestLibrary
+    - secure: "W7T7rCyD2ca+dgdcWR8o33CS0WmMCw6EMamRwynHJJTyPr5t3Uff/asHB7FIit1X6843xyhAlFG9nAWjwJ4jGC/KXvjgtb8EHB+VVe9+i6h7HNTzMRgyjt7quEq7wcUzjT5RLugVHXSkpwUjwOUJXbD9pQSjLCqF8RpQyDCkdxaMdlkRfn6OulR6IlXCEkKt2SyWJaaODXImGSza16KFZuRnZ/HkJoEsKFSpybFnxtffd5aKjr1BJw2v/QGBcWxczm6kV6NGHWr9JdLMiXv49bsa4GP80SylO1fj8nKhval0abPGSiOmIbzvvJDz1qolxjdCO4QdaABc9EXWQIGcCmknLo9v7r3kCc5TrQTL5wsc5DpUaHmLLZ5qxWvaKuXsdm+m+Ps2TADC065UT9tD9i/MyzFUAJwmYMQYZEpNLH5ajoYoDuARyRlqOAviJuFo9Gv8TEke749MHjZVV9kchCuoB+CsoixjZFRUIrWv9tspHsp2cFVOja3eKsRNiQiE1/nZkTyn6DTMvOtv2kmIAn5S1fOqV+rNMXLgGPOzvt31Iuj3greXmNlLzP24ZK5IpoeJYgfsJJO5gNpZo8GxcUR5q12E6gMzzarQboKA1jOQincoCj018a2PMSMUjm8FspXz2NG0vonQYnwv8vRTAsds8nKul7QqQv3w8x4xVe0="
+    - TWINCAT_STYLE_EXCLUDE=
+
+# Uncomment this block if you would like to make a test an allowed failure
+#jobs:
+#  allow_failures:
+#    - name: "Style Check"
+#    - name: "Pre-commit Checks"
+
+import:
+  - pcdshub/pcds-ci-helpers:travis/shared_configs/twincat/standard.yml
+
+# If not using the standard-python-conda above please uncomment the required
+# (language, os, dist and stages) and optional (import statements) entries from
+# the blocks below.
+#
+#language: python
+#os: linux
+#dist: xenial
+#
+#stages:
+#  - build
+#  - test
+#  - name: deploy
+#    if: (branch = master OR tag IS present) AND type != pull_request
+#
+#import:
+#  # Build stage
+#  - pcdshub/pcds-ci-helpers:travis/shared_configs/twincat/setup.yml
+#  # Test stage
+#  - pcdshub/pcds-ci-helpers:travis/shared_configs/twincat/docs-build.yml
+#  - pcdshub/pcds-ci-helpers:travis/shared_configs/twincat/pragmalint.yml
+#  - pcdshub/pcds-ci-helpers:travis/shared_configs/twincat/pre-commit.yml
+#  - pcdshub/pcds-ci-helpers:travis/shared_configs/twincat/style.yml
+#  - pcdshub/pcds-ci-helpers:travis/shared_configs/twincat/summary.yml
+#  # Deploy stage
+#  - pcdshub/pcds-ci-helpers:travis/shared_configs/twincat/doctr-upload.yml
