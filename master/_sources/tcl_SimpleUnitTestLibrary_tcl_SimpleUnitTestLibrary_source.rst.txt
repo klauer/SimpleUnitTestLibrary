@@ -1,0 +1,1350 @@
+
+
+DUTs
+----
+
+
+TTestResult
+^^^^^^^^^^^
+
+::
+
+    TYPE TTestResult :
+    STRUCT
+        TestName  : T_MaxString;
+        TestState : T_MaxString;
+        ImageRef  : T_MaxString;
+        TestCompleteTime : T_MaxString;
+    END_STRUCT
+    END_TYPE
+
+
+GVLs
+----
+
+
+Global_Version
+^^^^^^^^^^^^^^
+
+::
+
+    {attribute 'TcGenerated'}
+    {attribute 'no-analysis'}
+    {attribute 'linkalways'}
+    // This function has been automatically generated from the project information.
+    VAR_GLOBAL CONSTANT
+    	{attribute 'const_non_replaced'}
+    	stLibVersion_tcl_SimpleUnitTestLibrary : ST_LibVersion := (iMajor := 1, iMinor := 0, iBuild := 1, iRevision := 0, nFlags := 0, sVersion := '1.0.1.0');
+    END_VAR
+
+
+Parameters
+^^^^^^^^^^
+
+::
+
+    VAR_GLOBAL CONSTANT
+        MAX_TESTS              : DINT := 200;
+        MAX_ASSERTION_MESSAGES : DINT := 200;
+    END_VAR
+
+
+TestFramework
+^^^^^^^^^^^^^
+
+::
+
+    {attribute 'qualified_only'}
+    VAR_GLOBAL
+        TestRunner : TTestRunner;
+        
+    END_VAR
+
+
+POUs
+----
+
+
+PB_TestRunner
+^^^^^^^^^^^^^
+
+::
+
+    PROGRAM PB_TestRunner
+    VAR
+        Test_AssertEquals_BOOL      : Test_AssertEquals_BOOL;
+        Test_AssertEquals_BYTE      : Test_AssertEquals_BYTE;
+        Test_AssertEquals_DINT      : Test_AssertEquals_DINT;
+        Test_AssertEquals_INT       : Test_AssertEquals_INT;
+        Test_AssertEquals_INTERFACE : Test_AssertEquals_INTERFACE;
+        Test_AssertEquals_LINT      : Test_AssertEquals_LINT;
+        Test_AssertEquals_LREAL     : Test_AssertEquals_LREAL;
+        Test_AssertEquals_PVOID     : Test_AssertEquals_PVOID;
+        Test_AssertEquals_REAL      : Test_AssertEquals_REAL;
+        Test_AssertEquals_STRING    : Test_AssertEquals_STRING;
+        Test_AssertEquals_UDINT     : Test_AssertEquals_UDINT;
+        Test_AssertEquals_UINT      : Test_AssertEquals_UINT;
+        Test_AssertEquals_ULINT     : Test_AssertEquals_ULINT;  
+        Test_AssertEquals_WORD      : Test_AssertEquals_WORD;
+        Test_AssertEquals_DWORD     : Test_AssertEquals_DWORD;
+        
+        Test_AssertEquals_BLOB_SizeDiffers          : Test_AssertEquals_BLOB_SizeDiffers;  
+        Test_AssertEquals_BLOB_TypeClassDiffers     : Test_AssertEquals_BLOB_TypeClassDiffers;
+        Test_AssertEquals_BLOB_TypeContentDiffers   : Test_AssertEquals_BLOB_TypeContentDiffers;
+    END_VAR
+    TestFramework.TestRunner();
+
+    END_PROGRAM
+
+
+TAssertion
+^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK TAssertion
+    VAR_INPUT
+    END_VAR
+    VAR_OUTPUT
+    END_VAR
+    VAR
+        _AssertionFailed : BOOL;
+        _AssertionMessage : T_MaxString;
+        _ExpectedAsString : T_MaxString;
+        _ActualAsString   : T_MaxString;
+        _AssertionListener : IAssertionListener;
+    END_VAR
+
+
+    END_FUNCTION_BLOCK
+
+
+TAssertionListenerMock
+^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK TAssertionListenerMock IMPLEMENTS IAssertionListener
+    VAR
+        _AssertionFailed  : BOOL;
+        _AssertionMessage : T_MaxString;
+        _ExpectedAsString : T_MaxString;
+        _ActualAsString   : T_MaxString;
+    END_VAR
+
+
+    END_FUNCTION_BLOCK
+
+
+TAssertionMessageList
+^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK TAssertionMessageList IMPLEMENTS IAssertionMessageList
+    VAR
+        _Messages : ARRAY[0..MAX_ASSERTION_MESSAGES] OF T_MaxString;
+        _Count : INT;
+    END_VAR
+
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_BLOB_SizeDiffers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_BLOB_SizeDiffers EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        BYTE_Variable : BYTE := 123;
+        WORD_Variable : WORD := 456;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_BLOB(
+        Expected := BYTE_Variable,
+        Actual   := WORD_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'WORD_VariableAsBlob');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_BLOB failed in AssertionTest: Value "Blob.Size"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 1',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 2',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_BLOB_TypeClassDiffers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_BLOB_TypeClassDiffers EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        
+        // Sizes are the same, but TypeClass differs...
+        INT_Variable  : INT  := 123;
+        WORD_Variable : WORD := 123;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_BLOB(
+        Expected := INT_Variable,
+        Actual   := WORD_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'WORD_VariableAsBlob');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_BLOB failed in AssertionTest: Value "Blob.TypeClass"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = INT',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = WORD',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_BLOB_TypeContentDiffers
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_BLOB_TypeContentDiffers EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        
+        // Sizes are the same, but TypeClass differs...
+        INT_Variable  : WORD := 123;
+        WORD_Variable : WORD := 124;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_BLOB(
+        Expected := INT_Variable,
+        Actual   := WORD_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'WORD_VariableAsBlob');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_BLOB failed in AssertionTest: Contents differ',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_BOOL
+^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_BOOL EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        BOOL_Variable : BOOL := FALSE;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := BOOL_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'BOOL_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_BOOL failed in AssertionTest: Value "BOOL_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = TRUE',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = FALSE',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_BYTE
+^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_BYTE EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        BYTE_Variable : BYTE := 123;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_BYTE(
+        Expected := 234,
+        Actual   := BYTE_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'BYTE_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_BYTE failed in AssertionTest: Value "BYTE_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 234',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 123',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_DINT
+^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_DINT EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        DINT_Variable : DINT := 1111;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_DINT(
+        Expected := 2222,
+        Actual   := DINT_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'DINT_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_DINT failed in AssertionTest: Value "DINT_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2222',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1111',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_DWORD
+^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_DWORD EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        DWORD_Variable : DWORD;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    DWORD_Variable := 1111;
+
+    AssertionUnderTest.AssertEquals_DWORD(
+        Expected := 2222, // deliberately different to test the assertion
+        Actual   := DWORD_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'DWORD_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_DWORD failed in AssertionTest: Value "DWORD_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2222',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1111',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_INT
+^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_INT EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        INT_Variable : INT := 1111;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_INT(
+        Expected := 2222,
+        Actual   := INT_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'INT_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_INT failed in AssertionTest: Value "INT_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2222',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1111',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_INTERFACE
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_INTERFACE EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        
+        ExampleInterfaceImplementation1   : TExampleInterfaceImplementation;
+        INTERFACE_Variable1 : IExampleInterface := ExampleInterfaceImplementation1;
+        
+        ExampleInterfaceImplementation2   : TExampleInterfaceImplementation;
+        INTERFACE_Variable2 : IExampleInterface := ExampleInterfaceImplementation2;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_INTERFACE(
+        Expected := INTERFACE_Variable1,
+        Actual   := INTERFACE_Variable2,
+        ObjectName := 'AssertionTest',
+        VariableName := 'INTERFACE_Variable2');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_INTERFACE failed in AssertionTest: Value "INTERFACE_Variable2"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Interfaces Differ',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_LINT
+^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_LINT EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        LINT_Variable : LINT := 1111;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_LINT(
+        Expected := 2222,
+        Actual   := LINT_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'LINT_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_LINT failed in AssertionTest: Value "LINT_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2222',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1111',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_LREAL
+^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_LREAL EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        LREAL_Variable : LREAL := 1.111;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_LREAL(
+        Expected := 2.222,
+        Actual   := LREAL_Variable,
+        Delta    := 0.001,
+        ObjectName := 'AssertionTest',
+        VariableName := 'LREAL_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_LREAL failed in AssertionTest: Value "LREAL_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2.222000',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1.111000',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_PVOID
+^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_PVOID EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        PVOID_Variable : PVOID := 1111;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_PVOID(
+        Expected := 2222,
+        Actual   := PVOID_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'PVOID_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_PVOID failed in AssertionTest: Value "PVOID_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2222',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1111',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_REAL
+^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_REAL EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        REAL_Variable : REAL := 1.111;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_REAL(
+        Expected := 2.222,
+        Actual   := REAL_Variable,
+        Delta    := 0.001,
+        ObjectName := 'AssertionTest',
+        VariableName := 'REAL_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_REAL failed in AssertionTest: Value "REAL_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2.222000',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1.111000',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_STRING
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_STRING EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        STRING_Variable : STRING := 'Cucumber';
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_STRING(
+        Expected := 'Radish',
+        Actual   := STRING_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'STRING_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_STRING failed in AssertionTest: Value "STRING_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = Radish',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = Cucumber',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_UDINT
+^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_UDINT EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        UDINT_Variable : UDINT := 1111;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_UDINT(
+        Expected := 2222,
+        Actual   := UDINT_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'UDINT_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_UDINT failed in AssertionTest: Value "UDINT_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2222',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1111',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_UINT
+^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_UINT EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        UINT_Variable : UINT := 1111;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_UINT(
+        Expected := 2222,
+        Actual   := UINT_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'UINT_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_UINT failed in AssertionTest: Value "UINT_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2222',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1111',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_ULINT
+^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_ULINT EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        ULINT_Variable : ULINT := 1111;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    AssertionUnderTest.AssertEquals_ULINT(
+        Expected := 2222,
+        Actual   := ULINT_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'ULINT_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_ULINT failed in AssertionTest: Value "ULINT_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2222',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1111',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+Test_AssertEquals_WORD
+^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK Test_AssertEquals_WORD EXTENDS TUnitTestBase
+    VAR
+        AssertionUnderTest : TAssertion(AssertionListenerMock);
+        AssertionListenerMock : TAssertionListenerMock;
+        WORD_Variable : WORD;
+    END_VAR
+    AssertionListenerMock.AssertionFailed  := FALSE;
+    AssertionListenerMock.AssertionMessage := '';
+    AssertionListenerMock.ExpectedAsString := '';
+    AssertionListenerMock.ActualAsString   := '';
+
+    // Test the assertion...
+    WORD_Variable := 1111;
+
+    AssertionUnderTest.AssertEquals_WORD(
+        Expected := 2222, // deliberately different to test the assertion
+        Actual   := WORD_Variable,
+        ObjectName := 'AssertionTest',
+        VariableName := 'WORD_Variable');
+     
+        
+    // Check the assertion worked...    
+    Assertion.AssertEquals_BOOL(
+        Expected := TRUE,
+        Actual   := AssertionListenerMock.AssertionFailed,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionFailed');
+
+    // Check the assertion messages...    
+    Assertion.AssertEquals_STRING(
+        Expected := 'AssertEquals_WORD failed in AssertionTest: Value "WORD_Variable"',
+        Actual   := AssertionListenerMock.AssertionMessage,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.AssertionMessage');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Expected = 2222',
+        Actual   := AssertionListenerMock.ExpectedAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ExpectedAsString');
+
+    Assertion.AssertEquals_STRING(
+        Expected := '  Actual   = 1111',
+        Actual   := AssertionListenerMock.ActualAsString,
+        ObjectName := _TestName,
+        VariableName := 'AssertionListenerMock.ActualAsString');
+
+
+    TestFinished();
+
+    END_FUNCTION_BLOCK
+
+
+TExampleInterfaceImplementation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK TExampleInterfaceImplementation IMPLEMENTS IExampleInterface
+    VAR_INPUT
+    END_VAR
+    VAR_OUTPUT
+    END_VAR
+    VAR
+    END_VAR
+
+
+    END_FUNCTION_BLOCK
+
+
+TTestRunner
+^^^^^^^^^^^
+
+::
+
+    FUNCTION_BLOCK TTestRunner 
+    VAR_INPUT
+        RunTestsSequentially : BOOL;
+    END_VAR
+    VAR
+        Run : BOOL := TRUE;
+        
+        State :(
+            Init,
+            RunTests_Concurrently,
+            RunTests_Sequentially,
+            CheckResults);
+            
+        i : INT;
+        CompletedTestsCount : INT;
+        FailedTestsCount : INT;
+        CurrentTestIndex : INT;
+        
+        _TestsRunning : BOOL;
+        _Results : T_MaxString;
+        _AllTestsCompleted : BOOL;
+        _TestCount : INT;
+        
+        Tests : ARRAY[0..MAX_TESTS] OF IUnitTest;
+        TestResults : ARRAY[0..MAX_TESTS] OF TTestResult;
+        AssertionMessages : TAssertionMessageList;
+        
+        TestsCompletedPercentage : LREAL;
+    END_VAR
+    CASE State OF
+        Init:
+            IF Run THEN
+                Run := FALSE;
+                ClearResults();
+                AssertionMessages.Clear();
+                FOR i := 0 TO _TestCount - 1 DO
+                    IF Tests[i] <> 0 THEN
+                        Tests[i].Initialise(AssertionMessages);
+    				END_IF
+    			END_FOR
+                _TestsRunning := TRUE;
+                IF RunTestsSequentially THEN
+                    CurrentTestIndex := 0;
+                    State := RunTests_Sequentially;
+                ELSE
+                    State := RunTests_Concurrently;
+                END_IF
+    		END_IF
+            
+        RunTests_Concurrently:
+            CompletedTestsCount := 0;
+            FOR i := 0 TO _TestCount - 1 DO
+                IF Tests[i] <> 0 THEN
+                    IF Tests[i].TestHasFinished THEN
+                        addTimeStamp(TestResults[i]);
+                        IF Tests[i].TestHasFailed THEN
+                            TestResults[i].TestName  := Tests[i].TestName;
+                            TestResults[i].TestState := 'Failed';
+                            TestResults[i].ImageRef  := '3';
+                            FailedTestsCount := FailedTestsCount + 1;
+                        ELSE
+                            TestResults[i].TestName  := Tests[i].TestName;
+                            TestResults[i].TestState := 'Passed';
+                            TestResults[i].ImageRef  := '2';
+                        END_IF    
+                        
+                        CompletedTestsCount := CompletedTestsCount + 1;
+                        TestsCompletedPercentage := CompletedTestsCount * 100/_TestCount;
+                        _Results := F_FormatString2('%d Tests completed, %d Tests Failed',F_INT(CompletedTestsCount),F_INT(FailedTestsCount));
+                    ELSE
+                        TestResults[i].TestName  := Tests[i].TestName;
+                        TestResults[i].TestState := 'Running';
+                        TestResults[i].ImageRef  := '1';
+                        Tests[i].Execute();
+                    END_IF
+                END_IF
+            END_FOR
+            IF CompletedTestsCount >= _TestCount THEN
+                State := CheckResults;
+    		END_IF
+            
+        RunTests_Sequentially:
+            IF Tests[CurrentTestIndex] <> 0 THEN
+                IF Tests[CurrentTestIndex].TestHasFinished THEN
+                    addTimeStamp(TestResults[CurrentTestIndex]);
+                    IF Tests[CurrentTestIndex].TestHasFailed THEN
+                        TestResults[CurrentTestIndex].TestName  := Tests[CurrentTestIndex].TestName;
+                        TestResults[CurrentTestIndex].TestState := 'Failed';
+                        TestResults[CurrentTestIndex].ImageRef  := '3';
+                        FailedTestsCount := FailedTestsCount + 1;
+                    ELSE
+                        TestResults[CurrentTestIndex].TestName  := Tests[CurrentTestIndex].TestName;
+                        TestResults[CurrentTestIndex].TestState := 'Passed';
+                        TestResults[CurrentTestIndex].ImageRef  := '2';
+                    END_IF    
+                    
+                    CompletedTestsCount := CompletedTestsCount + 1;
+                    CurrentTestIndex := CurrentTestIndex + 1;
+                    TestsCompletedPercentage := CompletedTestsCount * 100/_TestCount;
+                    _Results := F_FormatString2('%d Tests completed, %d Tests Failed',F_INT(CompletedTestsCount),F_INT(FailedTestsCount));
+                ELSE
+                    TestResults[CurrentTestIndex].TestName  := Tests[CurrentTestIndex].TestName;
+                    TestResults[CurrentTestIndex].TestState := 'Running';
+                    TestResults[CurrentTestIndex].ImageRef  := '1';
+                    Tests[CurrentTestIndex].Execute();
+                END_IF
+            END_IF
+
+            IF CompletedTestsCount >= _TestCount THEN
+                State := CheckResults;
+    		END_IF
+
+        CheckResults:
+            _Results := F_FormatString2('%d Tests completed, %d Tests Failed',F_INT(CompletedTestsCount),F_INT(FailedTestsCount));
+            _TestsRunning := FALSE;
+            _AllTestsCompleted := TRUE;
+            
+            State := Init;
+        
+        
+    END_CASE
+
+    END_FUNCTION_BLOCK
+
+
+TUnitTestBase
+^^^^^^^^^^^^^
+
+::
+
+    {attribute 'reflection'}
+    FUNCTION_BLOCK ABSTRACT TUnitTestBase IMPLEMENTS IUnitTest, IAssertionListener
+    VAR
+        {attribute 'instance-path'} 
+        {attribute 'no_init'}
+        _TestName : T_MaxString; // Automatically initialised with the full name of the instance
+        
+        _TestFailed : BOOL;
+        _TestFinished : BOOL;
+        _ImageRef : STRING;
+        _MessageList : IAssertionMessageList;
+        
+        Assertion : TAssertion(THIS^);
+
+    END_VAR
+
+
+    END_FUNCTION_BLOCK
+

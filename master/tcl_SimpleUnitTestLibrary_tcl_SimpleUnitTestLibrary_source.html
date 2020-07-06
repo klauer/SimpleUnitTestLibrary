@@ -1,0 +1,1545 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DUTs &mdash; klauer/SimpleUnitTestLibrary  documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
+        <script src="_static/doctr-versions-menu.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Data Types" href="tcl_SimpleUnitTestLibrary_tcl_SimpleUnitTestLibrary_epics.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> klauer/SimpleUnitTestLibrary
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">tcl_SimpleUnitTestLibrary</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="tcl_SimpleUnitTestLibrary_pragmas.html">Pragmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcl_SimpleUnitTestLibrary_nc.html">NC Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcl_SimpleUnitTestLibrary_boxes.html">Boxes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcl_SimpleUnitTestLibrary_links.html">Links</a></li>
+</ul>
+<p class="caption"><span class="caption-text">tcl_SimpleUnitTestLibrary</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tcl_SimpleUnitTestLibrary_tcl_SimpleUnitTestLibrary_summary.html">Settings</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcl_SimpleUnitTestLibrary_tcl_SimpleUnitTestLibrary_summary.html#pragmas">Pragmas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcl_SimpleUnitTestLibrary_tcl_SimpleUnitTestLibrary_summary.html#symbols">Symbols</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcl_SimpleUnitTestLibrary_tcl_SimpleUnitTestLibrary_epics.html">Data Types</a></li>
+<li class="toctree-l1"><a class="reference internal" href="tcl_SimpleUnitTestLibrary_tcl_SimpleUnitTestLibrary_epics.html#database-records">Database Records</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">DUTs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#ttestresult">TTestResult</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#gvls">GVLs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#global-version">Global_Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#parameters">Parameters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#testframework">TestFramework</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#pous">POUs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pb-testrunner">PB_TestRunner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tassertion">TAssertion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tassertionlistenermock">TAssertionListenerMock</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tassertionmessagelist">TAssertionMessageList</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-blob-sizediffers">Test_AssertEquals_BLOB_SizeDiffers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-blob-typeclassdiffers">Test_AssertEquals_BLOB_TypeClassDiffers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-blob-typecontentdiffers">Test_AssertEquals_BLOB_TypeContentDiffers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-bool">Test_AssertEquals_BOOL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-byte">Test_AssertEquals_BYTE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-dint">Test_AssertEquals_DINT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-dword">Test_AssertEquals_DWORD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-int">Test_AssertEquals_INT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-interface">Test_AssertEquals_INTERFACE</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-lint">Test_AssertEquals_LINT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-lreal">Test_AssertEquals_LREAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-pvoid">Test_AssertEquals_PVOID</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-real">Test_AssertEquals_REAL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-string">Test_AssertEquals_STRING</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-udint">Test_AssertEquals_UDINT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-uint">Test_AssertEquals_UINT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-ulint">Test_AssertEquals_ULINT</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#test-assertequals-word">Test_AssertEquals_WORD</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#texampleinterfaceimplementation">TExampleInterfaceImplementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#ttestrunner">TTestRunner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tunittestbase">TUnitTestBase</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">klauer/SimpleUnitTestLibrary</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>DUTs</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/tcl_SimpleUnitTestLibrary_tcl_SimpleUnitTestLibrary_source.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="duts">
+<h1>DUTs<a class="headerlink" href="#duts" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="ttestresult">
+<h2>TTestResult<a class="headerlink" href="#ttestresult" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">TYPE</span> <span class="n">TTestResult</span> <span class="p">:</span>
+<span class="n">STRUCT</span>
+    <span class="n">TestName</span>  <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+    <span class="n">TestState</span> <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+    <span class="n">ImageRef</span>  <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+    <span class="n">TestCompleteTime</span> <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+<span class="n">END_STRUCT</span>
+<span class="n">END_TYPE</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="gvls">
+<h1>GVLs<a class="headerlink" href="#gvls" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="global-version">
+<h2>Global_Version<a class="headerlink" href="#global-version" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">attribute</span> <span class="s1">&#39;TcGenerated&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="n">attribute</span> <span class="s1">&#39;no-analysis&#39;</span><span class="p">}</span>
+<span class="p">{</span><span class="n">attribute</span> <span class="s1">&#39;linkalways&#39;</span><span class="p">}</span>
+<span class="o">//</span> <span class="n">This</span> <span class="n">function</span> <span class="n">has</span> <span class="n">been</span> <span class="n">automatically</span> <span class="n">generated</span> <span class="kn">from</span> <span class="nn">the</span> <span class="n">project</span> <span class="n">information</span><span class="o">.</span>
+<span class="n">VAR_GLOBAL</span> <span class="n">CONSTANT</span>
+    <span class="p">{</span><span class="n">attribute</span> <span class="s1">&#39;const_non_replaced&#39;</span><span class="p">}</span>
+    <span class="n">stLibVersion_tcl_SimpleUnitTestLibrary</span> <span class="p">:</span> <span class="n">ST_LibVersion</span> <span class="o">:=</span> <span class="p">(</span><span class="n">iMajor</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">iMinor</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">iBuild</span> <span class="o">:=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">iRevision</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">nFlags</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">sVersion</span> <span class="o">:=</span> <span class="s1">&#39;1.0.1.0&#39;</span><span class="p">);</span>
+<span class="n">END_VAR</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="parameters">
+<h2>Parameters<a class="headerlink" href="#parameters" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">VAR_GLOBAL</span> <span class="n">CONSTANT</span>
+    <span class="n">MAX_TESTS</span>              <span class="p">:</span> <span class="n">DINT</span> <span class="o">:=</span> <span class="mi">200</span><span class="p">;</span>
+    <span class="n">MAX_ASSERTION_MESSAGES</span> <span class="p">:</span> <span class="n">DINT</span> <span class="o">:=</span> <span class="mi">200</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="testframework">
+<h2>TestFramework<a class="headerlink" href="#testframework" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">attribute</span> <span class="s1">&#39;qualified_only&#39;</span><span class="p">}</span>
+<span class="n">VAR_GLOBAL</span>
+    <span class="n">TestRunner</span> <span class="p">:</span> <span class="n">TTestRunner</span><span class="p">;</span>
+
+<span class="n">END_VAR</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="pous">
+<h1>POUs<a class="headerlink" href="#pous" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="pb-testrunner">
+<h2>PB_TestRunner<a class="headerlink" href="#pb-testrunner" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PROGRAM</span> <span class="n">PB_TestRunner</span>
+<span class="n">VAR</span>
+    <span class="n">Test_AssertEquals_BOOL</span>      <span class="p">:</span> <span class="n">Test_AssertEquals_BOOL</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_BYTE</span>      <span class="p">:</span> <span class="n">Test_AssertEquals_BYTE</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_DINT</span>      <span class="p">:</span> <span class="n">Test_AssertEquals_DINT</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_INT</span>       <span class="p">:</span> <span class="n">Test_AssertEquals_INT</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_INTERFACE</span> <span class="p">:</span> <span class="n">Test_AssertEquals_INTERFACE</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_LINT</span>      <span class="p">:</span> <span class="n">Test_AssertEquals_LINT</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_LREAL</span>     <span class="p">:</span> <span class="n">Test_AssertEquals_LREAL</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_PVOID</span>     <span class="p">:</span> <span class="n">Test_AssertEquals_PVOID</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_REAL</span>      <span class="p">:</span> <span class="n">Test_AssertEquals_REAL</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_STRING</span>    <span class="p">:</span> <span class="n">Test_AssertEquals_STRING</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_UDINT</span>     <span class="p">:</span> <span class="n">Test_AssertEquals_UDINT</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_UINT</span>      <span class="p">:</span> <span class="n">Test_AssertEquals_UINT</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_ULINT</span>     <span class="p">:</span> <span class="n">Test_AssertEquals_ULINT</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_WORD</span>      <span class="p">:</span> <span class="n">Test_AssertEquals_WORD</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_DWORD</span>     <span class="p">:</span> <span class="n">Test_AssertEquals_DWORD</span><span class="p">;</span>
+
+    <span class="n">Test_AssertEquals_BLOB_SizeDiffers</span>          <span class="p">:</span> <span class="n">Test_AssertEquals_BLOB_SizeDiffers</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_BLOB_TypeClassDiffers</span>     <span class="p">:</span> <span class="n">Test_AssertEquals_BLOB_TypeClassDiffers</span><span class="p">;</span>
+    <span class="n">Test_AssertEquals_BLOB_TypeContentDiffers</span>   <span class="p">:</span> <span class="n">Test_AssertEquals_BLOB_TypeContentDiffers</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">TestFramework</span><span class="o">.</span><span class="n">TestRunner</span><span class="p">();</span>
+
+<span class="n">END_PROGRAM</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tassertion">
+<h2>TAssertion<a class="headerlink" href="#tassertion" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">TAssertion</span>
+<span class="n">VAR_INPUT</span>
+<span class="n">END_VAR</span>
+<span class="n">VAR_OUTPUT</span>
+<span class="n">END_VAR</span>
+<span class="n">VAR</span>
+    <span class="n">_AssertionFailed</span> <span class="p">:</span> <span class="n">BOOL</span><span class="p">;</span>
+    <span class="n">_AssertionMessage</span> <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+    <span class="n">_ExpectedAsString</span> <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+    <span class="n">_ActualAsString</span>   <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+    <span class="n">_AssertionListener</span> <span class="p">:</span> <span class="n">IAssertionListener</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tassertionlistenermock">
+<h2>TAssertionListenerMock<a class="headerlink" href="#tassertionlistenermock" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">TAssertionListenerMock</span> <span class="n">IMPLEMENTS</span> <span class="n">IAssertionListener</span>
+<span class="n">VAR</span>
+    <span class="n">_AssertionFailed</span>  <span class="p">:</span> <span class="n">BOOL</span><span class="p">;</span>
+    <span class="n">_AssertionMessage</span> <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+    <span class="n">_ExpectedAsString</span> <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+    <span class="n">_ActualAsString</span>   <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tassertionmessagelist">
+<h2>TAssertionMessageList<a class="headerlink" href="#tassertionmessagelist" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">TAssertionMessageList</span> <span class="n">IMPLEMENTS</span> <span class="n">IAssertionMessageList</span>
+<span class="n">VAR</span>
+    <span class="n">_Messages</span> <span class="p">:</span> <span class="n">ARRAY</span><span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="n">MAX_ASSERTION_MESSAGES</span><span class="p">]</span> <span class="n">OF</span> <span class="n">T_MaxString</span><span class="p">;</span>
+    <span class="n">_Count</span> <span class="p">:</span> <span class="n">INT</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-blob-sizediffers">
+<h2>Test_AssertEquals_BLOB_SizeDiffers<a class="headerlink" href="#test-assertequals-blob-sizediffers" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_BLOB_SizeDiffers</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">BYTE_Variable</span> <span class="p">:</span> <span class="n">BYTE</span> <span class="o">:=</span> <span class="mi">123</span><span class="p">;</span>
+    <span class="n">WORD_Variable</span> <span class="p">:</span> <span class="n">WORD</span> <span class="o">:=</span> <span class="mi">456</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_BLOB</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">BYTE_Variable</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">WORD_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;WORD_VariableAsBlob&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_BLOB failed in AssertionTest: Value &quot;Blob.Size&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 1&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 2&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-blob-typeclassdiffers">
+<h2>Test_AssertEquals_BLOB_TypeClassDiffers<a class="headerlink" href="#test-assertequals-blob-typeclassdiffers" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_BLOB_TypeClassDiffers</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+
+    <span class="o">//</span> <span class="n">Sizes</span> <span class="n">are</span> <span class="n">the</span> <span class="n">same</span><span class="p">,</span> <span class="n">but</span> <span class="n">TypeClass</span> <span class="n">differs</span><span class="o">...</span>
+    <span class="n">INT_Variable</span>  <span class="p">:</span> <span class="n">INT</span>  <span class="o">:=</span> <span class="mi">123</span><span class="p">;</span>
+    <span class="n">WORD_Variable</span> <span class="p">:</span> <span class="n">WORD</span> <span class="o">:=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_BLOB</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">INT_Variable</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">WORD_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;WORD_VariableAsBlob&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_BLOB failed in AssertionTest: Value &quot;Blob.TypeClass&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = INT&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = WORD&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-blob-typecontentdiffers">
+<h2>Test_AssertEquals_BLOB_TypeContentDiffers<a class="headerlink" href="#test-assertequals-blob-typecontentdiffers" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_BLOB_TypeContentDiffers</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+
+    <span class="o">//</span> <span class="n">Sizes</span> <span class="n">are</span> <span class="n">the</span> <span class="n">same</span><span class="p">,</span> <span class="n">but</span> <span class="n">TypeClass</span> <span class="n">differs</span><span class="o">...</span>
+    <span class="n">INT_Variable</span>  <span class="p">:</span> <span class="n">WORD</span> <span class="o">:=</span> <span class="mi">123</span><span class="p">;</span>
+    <span class="n">WORD_Variable</span> <span class="p">:</span> <span class="n">WORD</span> <span class="o">:=</span> <span class="mi">124</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_BLOB</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">INT_Variable</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">WORD_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;WORD_VariableAsBlob&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_BLOB failed in AssertionTest: Contents differ&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-bool">
+<h2>Test_AssertEquals_BOOL<a class="headerlink" href="#test-assertequals-bool" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_BOOL</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">BOOL_Variable</span> <span class="p">:</span> <span class="n">BOOL</span> <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">BOOL_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;BOOL_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_BOOL failed in AssertionTest: Value &quot;BOOL_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = TRUE&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = FALSE&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-byte">
+<h2>Test_AssertEquals_BYTE<a class="headerlink" href="#test-assertequals-byte" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_BYTE</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">BYTE_Variable</span> <span class="p">:</span> <span class="n">BYTE</span> <span class="o">:=</span> <span class="mi">123</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_BYTE</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mi">234</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">BYTE_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;BYTE_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_BYTE failed in AssertionTest: Value &quot;BYTE_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 234&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 123&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-dint">
+<h2>Test_AssertEquals_DINT<a class="headerlink" href="#test-assertequals-dint" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_DINT</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">DINT_Variable</span> <span class="p">:</span> <span class="n">DINT</span> <span class="o">:=</span> <span class="mi">1111</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_DINT</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mi">2222</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">DINT_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;DINT_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_DINT failed in AssertionTest: Value &quot;DINT_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2222&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1111&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-dword">
+<h2>Test_AssertEquals_DWORD<a class="headerlink" href="#test-assertequals-dword" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_DWORD</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">DWORD_Variable</span> <span class="p">:</span> <span class="n">DWORD</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">DWORD_Variable</span> <span class="o">:=</span> <span class="mi">1111</span><span class="p">;</span>
+
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_DWORD</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mi">2222</span><span class="p">,</span> <span class="o">//</span> <span class="n">deliberately</span> <span class="n">different</span> <span class="n">to</span> <span class="n">test</span> <span class="n">the</span> <span class="n">assertion</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">DWORD_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;DWORD_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_DWORD failed in AssertionTest: Value &quot;DWORD_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2222&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1111&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-int">
+<h2>Test_AssertEquals_INT<a class="headerlink" href="#test-assertequals-int" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_INT</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">INT_Variable</span> <span class="p">:</span> <span class="n">INT</span> <span class="o">:=</span> <span class="mi">1111</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_INT</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mi">2222</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">INT_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;INT_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_INT failed in AssertionTest: Value &quot;INT_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2222&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1111&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-interface">
+<h2>Test_AssertEquals_INTERFACE<a class="headerlink" href="#test-assertequals-interface" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_INTERFACE</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+
+    <span class="n">ExampleInterfaceImplementation1</span>   <span class="p">:</span> <span class="n">TExampleInterfaceImplementation</span><span class="p">;</span>
+    <span class="n">INTERFACE_Variable1</span> <span class="p">:</span> <span class="n">IExampleInterface</span> <span class="o">:=</span> <span class="n">ExampleInterfaceImplementation1</span><span class="p">;</span>
+
+    <span class="n">ExampleInterfaceImplementation2</span>   <span class="p">:</span> <span class="n">TExampleInterfaceImplementation</span><span class="p">;</span>
+    <span class="n">INTERFACE_Variable2</span> <span class="p">:</span> <span class="n">IExampleInterface</span> <span class="o">:=</span> <span class="n">ExampleInterfaceImplementation2</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_INTERFACE</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">INTERFACE_Variable1</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">INTERFACE_Variable2</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;INTERFACE_Variable2&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_INTERFACE failed in AssertionTest: Value &quot;INTERFACE_Variable2&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Interfaces Differ&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-lint">
+<h2>Test_AssertEquals_LINT<a class="headerlink" href="#test-assertequals-lint" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_LINT</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">LINT_Variable</span> <span class="p">:</span> <span class="n">LINT</span> <span class="o">:=</span> <span class="mi">1111</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_LINT</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mi">2222</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">LINT_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;LINT_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_LINT failed in AssertionTest: Value &quot;LINT_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2222&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1111&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-lreal">
+<h2>Test_AssertEquals_LREAL<a class="headerlink" href="#test-assertequals-lreal" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_LREAL</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">LREAL_Variable</span> <span class="p">:</span> <span class="n">LREAL</span> <span class="o">:=</span> <span class="mf">1.111</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_LREAL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mf">2.222</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">LREAL_Variable</span><span class="p">,</span>
+    <span class="n">Delta</span>    <span class="o">:=</span> <span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;LREAL_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_LREAL failed in AssertionTest: Value &quot;LREAL_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2.222000&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1.111000&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-pvoid">
+<h2>Test_AssertEquals_PVOID<a class="headerlink" href="#test-assertequals-pvoid" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_PVOID</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">PVOID_Variable</span> <span class="p">:</span> <span class="n">PVOID</span> <span class="o">:=</span> <span class="mi">1111</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_PVOID</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mi">2222</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">PVOID_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;PVOID_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_PVOID failed in AssertionTest: Value &quot;PVOID_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2222&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1111&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-real">
+<h2>Test_AssertEquals_REAL<a class="headerlink" href="#test-assertequals-real" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_REAL</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">REAL_Variable</span> <span class="p">:</span> <span class="n">REAL</span> <span class="o">:=</span> <span class="mf">1.111</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_REAL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mf">2.222</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">REAL_Variable</span><span class="p">,</span>
+    <span class="n">Delta</span>    <span class="o">:=</span> <span class="mf">0.001</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;REAL_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_REAL failed in AssertionTest: Value &quot;REAL_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2.222000&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1.111000&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-string">
+<h2>Test_AssertEquals_STRING<a class="headerlink" href="#test-assertequals-string" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_STRING</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">STRING_Variable</span> <span class="p">:</span> <span class="n">STRING</span> <span class="o">:=</span> <span class="s1">&#39;Cucumber&#39;</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;Radish&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">STRING_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;STRING_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_STRING failed in AssertionTest: Value &quot;STRING_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = Radish&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = Cucumber&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-udint">
+<h2>Test_AssertEquals_UDINT<a class="headerlink" href="#test-assertequals-udint" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_UDINT</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">UDINT_Variable</span> <span class="p">:</span> <span class="n">UDINT</span> <span class="o">:=</span> <span class="mi">1111</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_UDINT</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mi">2222</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">UDINT_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;UDINT_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_UDINT failed in AssertionTest: Value &quot;UDINT_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2222&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1111&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-uint">
+<h2>Test_AssertEquals_UINT<a class="headerlink" href="#test-assertequals-uint" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_UINT</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">UINT_Variable</span> <span class="p">:</span> <span class="n">UINT</span> <span class="o">:=</span> <span class="mi">1111</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_UINT</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mi">2222</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">UINT_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;UINT_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_UINT failed in AssertionTest: Value &quot;UINT_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2222&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1111&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-ulint">
+<h2>Test_AssertEquals_ULINT<a class="headerlink" href="#test-assertequals-ulint" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_ULINT</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">ULINT_Variable</span> <span class="p">:</span> <span class="n">ULINT</span> <span class="o">:=</span> <span class="mi">1111</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_ULINT</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mi">2222</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">ULINT_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;ULINT_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_ULINT failed in AssertionTest: Value &quot;ULINT_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2222&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1111&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="test-assertequals-word">
+<h2>Test_AssertEquals_WORD<a class="headerlink" href="#test-assertequals-word" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">Test_AssertEquals_WORD</span> <span class="n">EXTENDS</span> <span class="n">TUnitTestBase</span>
+<span class="n">VAR</span>
+    <span class="n">AssertionUnderTest</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">AssertionListenerMock</span><span class="p">);</span>
+    <span class="n">AssertionListenerMock</span> <span class="p">:</span> <span class="n">TAssertionListenerMock</span><span class="p">;</span>
+    <span class="n">WORD_Variable</span> <span class="p">:</span> <span class="n">WORD</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span>  <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span> <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span>   <span class="o">:=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">Test</span> <span class="n">the</span> <span class="n">assertion</span><span class="o">...</span>
+<span class="n">WORD_Variable</span> <span class="o">:=</span> <span class="mi">1111</span><span class="p">;</span>
+
+<span class="n">AssertionUnderTest</span><span class="o">.</span><span class="n">AssertEquals_WORD</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="mi">2222</span><span class="p">,</span> <span class="o">//</span> <span class="n">deliberately</span> <span class="n">different</span> <span class="n">to</span> <span class="n">test</span> <span class="n">the</span> <span class="n">assertion</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">WORD_Variable</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionTest&#39;</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;WORD_Variable&#39;</span><span class="p">);</span>
+
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">worked</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_BOOL</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionFailed</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionFailed&#39;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Check</span> <span class="n">the</span> <span class="n">assertion</span> <span class="n">messages</span><span class="o">...</span>
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;AssertEquals_WORD failed in AssertionTest: Value &quot;WORD_Variable&quot;&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">AssertionMessage</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.AssertionMessage&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Expected = 2222&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ExpectedAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ExpectedAsString&#39;</span><span class="p">);</span>
+
+<span class="n">Assertion</span><span class="o">.</span><span class="n">AssertEquals_STRING</span><span class="p">(</span>
+    <span class="n">Expected</span> <span class="o">:=</span> <span class="s1">&#39;  Actual   = 1111&#39;</span><span class="p">,</span>
+    <span class="n">Actual</span>   <span class="o">:=</span> <span class="n">AssertionListenerMock</span><span class="o">.</span><span class="n">ActualAsString</span><span class="p">,</span>
+    <span class="n">ObjectName</span> <span class="o">:=</span> <span class="n">_TestName</span><span class="p">,</span>
+    <span class="n">VariableName</span> <span class="o">:=</span> <span class="s1">&#39;AssertionListenerMock.ActualAsString&#39;</span><span class="p">);</span>
+
+
+<span class="n">TestFinished</span><span class="p">();</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="texampleinterfaceimplementation">
+<h2>TExampleInterfaceImplementation<a class="headerlink" href="#texampleinterfaceimplementation" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">TExampleInterfaceImplementation</span> <span class="n">IMPLEMENTS</span> <span class="n">IExampleInterface</span>
+<span class="n">VAR_INPUT</span>
+<span class="n">END_VAR</span>
+<span class="n">VAR_OUTPUT</span>
+<span class="n">END_VAR</span>
+<span class="n">VAR</span>
+<span class="n">END_VAR</span>
+
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="ttestrunner">
+<h2>TTestRunner<a class="headerlink" href="#ttestrunner" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">FUNCTION_BLOCK</span> <span class="n">TTestRunner</span>
+<span class="n">VAR_INPUT</span>
+    <span class="n">RunTestsSequentially</span> <span class="p">:</span> <span class="n">BOOL</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">VAR</span>
+    <span class="n">Run</span> <span class="p">:</span> <span class="n">BOOL</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">;</span>
+
+    <span class="n">State</span> <span class="p">:(</span>
+        <span class="n">Init</span><span class="p">,</span>
+        <span class="n">RunTests_Concurrently</span><span class="p">,</span>
+        <span class="n">RunTests_Sequentially</span><span class="p">,</span>
+        <span class="n">CheckResults</span><span class="p">);</span>
+
+    <span class="n">i</span> <span class="p">:</span> <span class="n">INT</span><span class="p">;</span>
+    <span class="n">CompletedTestsCount</span> <span class="p">:</span> <span class="n">INT</span><span class="p">;</span>
+    <span class="n">FailedTestsCount</span> <span class="p">:</span> <span class="n">INT</span><span class="p">;</span>
+    <span class="n">CurrentTestIndex</span> <span class="p">:</span> <span class="n">INT</span><span class="p">;</span>
+
+    <span class="n">_TestsRunning</span> <span class="p">:</span> <span class="n">BOOL</span><span class="p">;</span>
+    <span class="n">_Results</span> <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span>
+    <span class="n">_AllTestsCompleted</span> <span class="p">:</span> <span class="n">BOOL</span><span class="p">;</span>
+    <span class="n">_TestCount</span> <span class="p">:</span> <span class="n">INT</span><span class="p">;</span>
+
+    <span class="n">Tests</span> <span class="p">:</span> <span class="n">ARRAY</span><span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="n">MAX_TESTS</span><span class="p">]</span> <span class="n">OF</span> <span class="n">IUnitTest</span><span class="p">;</span>
+    <span class="n">TestResults</span> <span class="p">:</span> <span class="n">ARRAY</span><span class="p">[</span><span class="mf">0.</span><span class="o">.</span><span class="n">MAX_TESTS</span><span class="p">]</span> <span class="n">OF</span> <span class="n">TTestResult</span><span class="p">;</span>
+    <span class="n">AssertionMessages</span> <span class="p">:</span> <span class="n">TAssertionMessageList</span><span class="p">;</span>
+
+    <span class="n">TestsCompletedPercentage</span> <span class="p">:</span> <span class="n">LREAL</span><span class="p">;</span>
+<span class="n">END_VAR</span>
+<span class="n">CASE</span> <span class="n">State</span> <span class="n">OF</span>
+    <span class="n">Init</span><span class="p">:</span>
+        <span class="n">IF</span> <span class="n">Run</span> <span class="n">THEN</span>
+            <span class="n">Run</span> <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+            <span class="n">ClearResults</span><span class="p">();</span>
+            <span class="n">AssertionMessages</span><span class="o">.</span><span class="n">Clear</span><span class="p">();</span>
+            <span class="n">FOR</span> <span class="n">i</span> <span class="o">:=</span> <span class="mi">0</span> <span class="n">TO</span> <span class="n">_TestCount</span> <span class="o">-</span> <span class="mi">1</span> <span class="n">DO</span>
+                <span class="n">IF</span> <span class="n">Tests</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span> <span class="n">THEN</span>
+                    <span class="n">Tests</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">Initialise</span><span class="p">(</span><span class="n">AssertionMessages</span><span class="p">);</span>
+                            <span class="n">END_IF</span>
+                    <span class="n">END_FOR</span>
+            <span class="n">_TestsRunning</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">;</span>
+            <span class="n">IF</span> <span class="n">RunTestsSequentially</span> <span class="n">THEN</span>
+                <span class="n">CurrentTestIndex</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
+                <span class="n">State</span> <span class="o">:=</span> <span class="n">RunTests_Sequentially</span><span class="p">;</span>
+            <span class="n">ELSE</span>
+                <span class="n">State</span> <span class="o">:=</span> <span class="n">RunTests_Concurrently</span><span class="p">;</span>
+            <span class="n">END_IF</span>
+            <span class="n">END_IF</span>
+
+    <span class="n">RunTests_Concurrently</span><span class="p">:</span>
+        <span class="n">CompletedTestsCount</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="n">FOR</span> <span class="n">i</span> <span class="o">:=</span> <span class="mi">0</span> <span class="n">TO</span> <span class="n">_TestCount</span> <span class="o">-</span> <span class="mi">1</span> <span class="n">DO</span>
+            <span class="n">IF</span> <span class="n">Tests</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span> <span class="n">THEN</span>
+                <span class="n">IF</span> <span class="n">Tests</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestHasFinished</span> <span class="n">THEN</span>
+                    <span class="n">addTimeStamp</span><span class="p">(</span><span class="n">TestResults</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+                    <span class="n">IF</span> <span class="n">Tests</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestHasFailed</span> <span class="n">THEN</span>
+                        <span class="n">TestResults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span>  <span class="o">:=</span> <span class="n">Tests</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span><span class="p">;</span>
+                        <span class="n">TestResults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestState</span> <span class="o">:=</span> <span class="s1">&#39;Failed&#39;</span><span class="p">;</span>
+                        <span class="n">TestResults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ImageRef</span>  <span class="o">:=</span> <span class="s1">&#39;3&#39;</span><span class="p">;</span>
+                        <span class="n">FailedTestsCount</span> <span class="o">:=</span> <span class="n">FailedTestsCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                    <span class="n">ELSE</span>
+                        <span class="n">TestResults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span>  <span class="o">:=</span> <span class="n">Tests</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span><span class="p">;</span>
+                        <span class="n">TestResults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestState</span> <span class="o">:=</span> <span class="s1">&#39;Passed&#39;</span><span class="p">;</span>
+                        <span class="n">TestResults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ImageRef</span>  <span class="o">:=</span> <span class="s1">&#39;2&#39;</span><span class="p">;</span>
+                    <span class="n">END_IF</span>
+
+                    <span class="n">CompletedTestsCount</span> <span class="o">:=</span> <span class="n">CompletedTestsCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                    <span class="n">TestsCompletedPercentage</span> <span class="o">:=</span> <span class="n">CompletedTestsCount</span> <span class="o">*</span> <span class="mi">100</span><span class="o">/</span><span class="n">_TestCount</span><span class="p">;</span>
+                    <span class="n">_Results</span> <span class="o">:=</span> <span class="n">F_FormatString2</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> Tests completed, </span><span class="si">%d</span><span class="s1"> Tests Failed&#39;</span><span class="p">,</span><span class="n">F_INT</span><span class="p">(</span><span class="n">CompletedTestsCount</span><span class="p">),</span><span class="n">F_INT</span><span class="p">(</span><span class="n">FailedTestsCount</span><span class="p">));</span>
+                <span class="n">ELSE</span>
+                    <span class="n">TestResults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span>  <span class="o">:=</span> <span class="n">Tests</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span><span class="p">;</span>
+                    <span class="n">TestResults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">TestState</span> <span class="o">:=</span> <span class="s1">&#39;Running&#39;</span><span class="p">;</span>
+                    <span class="n">TestResults</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">ImageRef</span>  <span class="o">:=</span> <span class="s1">&#39;1&#39;</span><span class="p">;</span>
+                    <span class="n">Tests</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">Execute</span><span class="p">();</span>
+                <span class="n">END_IF</span>
+            <span class="n">END_IF</span>
+        <span class="n">END_FOR</span>
+        <span class="n">IF</span> <span class="n">CompletedTestsCount</span> <span class="o">&gt;=</span> <span class="n">_TestCount</span> <span class="n">THEN</span>
+            <span class="n">State</span> <span class="o">:=</span> <span class="n">CheckResults</span><span class="p">;</span>
+            <span class="n">END_IF</span>
+
+    <span class="n">RunTests_Sequentially</span><span class="p">:</span>
+        <span class="n">IF</span> <span class="n">Tests</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span> <span class="o">&lt;&gt;</span> <span class="mi">0</span> <span class="n">THEN</span>
+            <span class="n">IF</span> <span class="n">Tests</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestHasFinished</span> <span class="n">THEN</span>
+                <span class="n">addTimeStamp</span><span class="p">(</span><span class="n">TestResults</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]);</span>
+                <span class="n">IF</span> <span class="n">Tests</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestHasFailed</span> <span class="n">THEN</span>
+                    <span class="n">TestResults</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span>  <span class="o">:=</span> <span class="n">Tests</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span><span class="p">;</span>
+                    <span class="n">TestResults</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestState</span> <span class="o">:=</span> <span class="s1">&#39;Failed&#39;</span><span class="p">;</span>
+                    <span class="n">TestResults</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">ImageRef</span>  <span class="o">:=</span> <span class="s1">&#39;3&#39;</span><span class="p">;</span>
+                    <span class="n">FailedTestsCount</span> <span class="o">:=</span> <span class="n">FailedTestsCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">ELSE</span>
+                    <span class="n">TestResults</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span>  <span class="o">:=</span> <span class="n">Tests</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span><span class="p">;</span>
+                    <span class="n">TestResults</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestState</span> <span class="o">:=</span> <span class="s1">&#39;Passed&#39;</span><span class="p">;</span>
+                    <span class="n">TestResults</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">ImageRef</span>  <span class="o">:=</span> <span class="s1">&#39;2&#39;</span><span class="p">;</span>
+                <span class="n">END_IF</span>
+
+                <span class="n">CompletedTestsCount</span> <span class="o">:=</span> <span class="n">CompletedTestsCount</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">CurrentTestIndex</span> <span class="o">:=</span> <span class="n">CurrentTestIndex</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="n">TestsCompletedPercentage</span> <span class="o">:=</span> <span class="n">CompletedTestsCount</span> <span class="o">*</span> <span class="mi">100</span><span class="o">/</span><span class="n">_TestCount</span><span class="p">;</span>
+                <span class="n">_Results</span> <span class="o">:=</span> <span class="n">F_FormatString2</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> Tests completed, </span><span class="si">%d</span><span class="s1"> Tests Failed&#39;</span><span class="p">,</span><span class="n">F_INT</span><span class="p">(</span><span class="n">CompletedTestsCount</span><span class="p">),</span><span class="n">F_INT</span><span class="p">(</span><span class="n">FailedTestsCount</span><span class="p">));</span>
+            <span class="n">ELSE</span>
+                <span class="n">TestResults</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span>  <span class="o">:=</span> <span class="n">Tests</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestName</span><span class="p">;</span>
+                <span class="n">TestResults</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">TestState</span> <span class="o">:=</span> <span class="s1">&#39;Running&#39;</span><span class="p">;</span>
+                <span class="n">TestResults</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">ImageRef</span>  <span class="o">:=</span> <span class="s1">&#39;1&#39;</span><span class="p">;</span>
+                <span class="n">Tests</span><span class="p">[</span><span class="n">CurrentTestIndex</span><span class="p">]</span><span class="o">.</span><span class="n">Execute</span><span class="p">();</span>
+            <span class="n">END_IF</span>
+        <span class="n">END_IF</span>
+
+        <span class="n">IF</span> <span class="n">CompletedTestsCount</span> <span class="o">&gt;=</span> <span class="n">_TestCount</span> <span class="n">THEN</span>
+            <span class="n">State</span> <span class="o">:=</span> <span class="n">CheckResults</span><span class="p">;</span>
+            <span class="n">END_IF</span>
+
+    <span class="n">CheckResults</span><span class="p">:</span>
+        <span class="n">_Results</span> <span class="o">:=</span> <span class="n">F_FormatString2</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> Tests completed, </span><span class="si">%d</span><span class="s1"> Tests Failed&#39;</span><span class="p">,</span><span class="n">F_INT</span><span class="p">(</span><span class="n">CompletedTestsCount</span><span class="p">),</span><span class="n">F_INT</span><span class="p">(</span><span class="n">FailedTestsCount</span><span class="p">));</span>
+        <span class="n">_TestsRunning</span> <span class="o">:=</span> <span class="n">FALSE</span><span class="p">;</span>
+        <span class="n">_AllTestsCompleted</span> <span class="o">:=</span> <span class="n">TRUE</span><span class="p">;</span>
+
+        <span class="n">State</span> <span class="o">:=</span> <span class="n">Init</span><span class="p">;</span>
+
+
+<span class="n">END_CASE</span>
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="tunittestbase">
+<h2>TUnitTestBase<a class="headerlink" href="#tunittestbase" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">{</span><span class="n">attribute</span> <span class="s1">&#39;reflection&#39;</span><span class="p">}</span>
+<span class="n">FUNCTION_BLOCK</span> <span class="n">ABSTRACT</span> <span class="n">TUnitTestBase</span> <span class="n">IMPLEMENTS</span> <span class="n">IUnitTest</span><span class="p">,</span> <span class="n">IAssertionListener</span>
+<span class="n">VAR</span>
+    <span class="p">{</span><span class="n">attribute</span> <span class="s1">&#39;instance-path&#39;</span><span class="p">}</span>
+    <span class="p">{</span><span class="n">attribute</span> <span class="s1">&#39;no_init&#39;</span><span class="p">}</span>
+    <span class="n">_TestName</span> <span class="p">:</span> <span class="n">T_MaxString</span><span class="p">;</span> <span class="o">//</span> <span class="n">Automatically</span> <span class="n">initialised</span> <span class="k">with</span> <span class="n">the</span> <span class="n">full</span> <span class="n">name</span> <span class="n">of</span> <span class="n">the</span> <span class="n">instance</span>
+
+    <span class="n">_TestFailed</span> <span class="p">:</span> <span class="n">BOOL</span><span class="p">;</span>
+    <span class="n">_TestFinished</span> <span class="p">:</span> <span class="n">BOOL</span><span class="p">;</span>
+    <span class="n">_ImageRef</span> <span class="p">:</span> <span class="n">STRING</span><span class="p">;</span>
+    <span class="n">_MessageList</span> <span class="p">:</span> <span class="n">IAssertionMessageList</span><span class="p">;</span>
+
+    <span class="n">Assertion</span> <span class="p">:</span> <span class="n">TAssertion</span><span class="p">(</span><span class="n">THIS</span><span class="o">^</span><span class="p">);</span>
+
+<span class="n">END_VAR</span>
+
+
+<span class="n">END_FUNCTION_BLOCK</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="tcl_SimpleUnitTestLibrary_tcl_SimpleUnitTestLibrary_epics.html" class="btn btn-neutral float-left" title="Data Types" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, SLAC National Accelerator Laboratory
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
